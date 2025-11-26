@@ -7,8 +7,14 @@ class ParentNode(HTMLNode):
 
     def to_html(self):
         if self.tag is None:
-            raise ValueError
+            raise ValueError("Missing tag!")
+        if self.children is None:
+            raise ValueError("Missing children!")
+        res = f"<{self.tag}>"
         for child in self.children:
-            if child.value is None:
-                raise ValueError
+            res = res + child.to_html()
+        res = res + f"</{self.tag}>"
+        return res
+        
+            
         
